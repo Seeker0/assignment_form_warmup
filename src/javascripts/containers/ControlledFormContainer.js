@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ControlledForm from '../components/ControlledForm';
-import { validateForm } from '../helpers';
+import React, { Component } from "react";
+import ControlledForm from "../components/ControlledForm";
+import { validateForm } from "../helpers";
 
 class ControlledFormContainer extends Component {
   constructor() {
@@ -8,9 +8,9 @@ class ControlledFormContainer extends Component {
     this.state = {
       success: false,
       errors: {},
-      exampleEmail: '',
-      examplePassword: '',
-      exampleURL: ''
+      exampleEmail: "",
+      examplePassword: "",
+      exampleURL: ""
     };
   }
 
@@ -18,17 +18,17 @@ class ControlledFormContainer extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    validateForm(this.state);
   };
 
   onSubmit = e => {
     e.preventDefault();
-    let errorObj = validateForm(this.state);
     this.setState({
       ...this.state,
-      errors: errorObj
+      errors: validateForm(this.state)
     });
-    console.log(this.state.errors);
-    if (!this.state.errors) {
+
+    if (!Object.keys(this.state.errors).length) {
       this.formSuccess();
     }
   };
@@ -38,11 +38,11 @@ class ControlledFormContainer extends Component {
       {
         success: true,
         errors: {},
-        exampleEmail: '',
-        examplePassword: '',
-        exampleURL: ''
+        exampleEmail: "",
+        examplePassword: "",
+        exampleURL: ""
       },
-      () => console.log('Success!')
+      () => console.log("Success!")
     );
   };
 

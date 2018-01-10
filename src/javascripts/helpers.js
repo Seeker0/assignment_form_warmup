@@ -1,7 +1,7 @@
-import validate from 'validate.js';
+import validate from "validate.js";
 
 export function getColorFromError(error) {
-  return !!error ? 'danger' : 'default';
+  return !!error ? "danger" : "default";
 }
 
 export function isEmpty(object) {
@@ -23,6 +23,19 @@ const formConstraints = {
 };
 
 export function validateForm(formData) {
-  console.log(validate(formData, formConstraints));
+  return validate(formData, formConstraints);
+}
+
+export function validateField(field, fieldData) {
+  let formConstraints;
+  switch (field) {
+    case "exampleEmail":
+      return {
+        exampleEmail: {
+          presence: true,
+          email: true
+        }
+      };
+  }
   return validate(formData, formConstraints);
 }
